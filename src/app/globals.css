@@ -1,0 +1,87 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Clinical night lobby — near-black + rose-gold from brand mark */
+  --bg: oklch(0.12 0.01 25);
+  --surface: oklch(0.16 0.012 25);
+  --panel: oklch(0.19 0.012 25);
+  --line: oklch(0.28 0.015 25);
+  --ink: oklch(0.95 0.01 40);
+  --muted: oklch(0.72 0.02 40);
+  --faint: oklch(0.55 0.02 40);
+  --rose: oklch(0.68 0.09 25);
+  --rose-deep: oklch(0.52 0.1 25);
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  scroll-behavior: auto;
+}
+
+body {
+  color: var(--ink);
+  background: var(--bg);
+  font-family: var(--font-body), system-ui, sans-serif;
+  overflow-x: hidden;
+}
+
+.font-display {
+  font-family: var(--font-display), Georgia, "Times New Roman", serif;
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+  font-weight: 500;
+}
+
+::selection {
+  background: var(--rose);
+  color: var(--bg);
+}
+
+.kicker {
+  @apply text-[11px] font-semibold uppercase tracking-[0.22em];
+  color: var(--rose);
+}
+
+.btn-primary {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition;
+  background: var(--rose);
+  color: var(--bg);
+}
+.btn-primary:hover {
+  background: var(--rose-deep);
+  color: white;
+}
+
+.btn-ghost {
+  @apply inline-flex items-center justify-center gap-2 rounded-full px-6 py-3.5 text-sm font-semibold transition border;
+  border-color: color-mix(in oklch, var(--ink) 35%, transparent);
+  color: var(--ink);
+}
+.btn-ghost:hover {
+  border-color: var(--rose);
+  color: var(--rose);
+}
+
+.section-pad {
+  @apply mx-auto max-w-6xl px-4 py-20 sm:px-6 sm:py-28;
+}
+
+.rose-line {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--rose), transparent);
+  opacity: 0.5;
+}
+
+.concept-banner {
+  @apply relative z-[60] bg-[var(--ink)] px-4 py-2 text-center text-[11px] tracking-wide text-[var(--bg)];
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal {
+    opacity: 1 !important;
+    transform: none !important;
+    filter: none !important;
+  }
+}
