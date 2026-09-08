@@ -11,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 type Props = {
   before: string;
   after: string;
-  label?: string;
+  label: string;
   beforeLabel?: string;
   afterLabel?: string;
 };
@@ -34,15 +34,14 @@ export function BeforeAfter({
     if (!el || !clipEl || !handleEl) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     let dragging = false;
-    let pos = 0.15;
 
     const setPos = (p: number) => {
-      pos = Math.min(0.92, Math.max(0.08, p));
+      const pos = Math.min(0.92, Math.max(0.08, p));
       const pct = `${pos * 100}%`;
       clipEl.style.clipPath = `inset(0 0 0 ${pct})`;
       handleEl.style.left = pct;
     };
-    setPos(pos);
+    setPos(0.12);
 
     const onPointer = (x: number) => {
       const rect = el.getBoundingClientRect();
@@ -69,12 +68,12 @@ export function BeforeAfter({
     if (!reduce) {
       st = ScrollTrigger.create({
         trigger: el,
-        start: "top 75%",
+        start: "top 80%",
         end: "bottom 25%",
-        scrub: 0.4,
+        scrub: 0.35,
         onUpdate: (self) => {
           if (dragging) return;
-          setPos(0.12 + self.progress * 0.72);
+          setPos(0.1 + self.progress * 0.75);
         },
       });
     }
@@ -88,31 +87,27 @@ export function BeforeAfter({
   }, []);
 
   return (
-    <div className="space-y-3">
-      {label && <p className="text-sm text-[var(--muted)]">{label}</p>}
+    <div>
+      <p className="mb-3 text-sm text-[var(--muted)]">{label}</p>
       <div
         ref={root}
-        className="relative aspect-[4/5] touch-none select-none overflow-hidden border border-[var(--line)] bg-[var(--panel)] sm:aspect-[5/4]"
+        className="relative aspect-[16/10] touch-none select-none overflow-hidden bg-[var(--surface)]"
         role="img"
-        aria-label={`${beforeLabel} and ${afterLabel} comparison`}
+        aria-label={`${label}: ${beforeLabel} to ${afterLabel}`}
       >
-        <Image src={asset(before)} alt={beforeLabel} fill className="object-cover" sizes="(max-width:768px) 100vw, 720px" />
-        <div ref={clip} className="absolute inset-0" style={{ clipPath: "inset(0 0 0 15%)" }}>
-          <Image src={asset(after)} alt={afterLabel} fill className="object-cover" sizes="(max-width:768px) 100vw, 720px" />
+        <Image src={asset(before)} alt={beforeLabel} fill className="object-cover" sizes="(max-width:768px) 100vw, 640px" />
+        <div ref={clip} className="absolute inset-0" style={{ clipPath: "inset(0 0 0 12%)" }}>
+          <Image src={asset(after)} alt={afterLabel} fill className="object-cover" sizes="(max-width:768px) 100vw, 640px" />
         </div>
-        <div
-          ref={handle}
-          className="absolute inset-y-0 z-10 w-px bg-[var(--rose)]"
-          style={{ left: "15%" }}
-        >
-          <div className="absolute left-1/2 top-1/2 flex h-11 w-11 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-[var(--rose)] bg-[var(--bg)] text-[10px] font-bold tracking-wide text-[var(--rose)]">
+        <div ref={handle} className="absolute inset-y-0 z-10 w-px bg-white" style={{ left: "12%" }}>
+          <div className="absolute left-1/2 top-1/2 flex h-10 w-10 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white bg-[var(--charcoal)] text-[10px] font-bold text-white">
             ◀▶
           </div>
         </div>
-        <span className="absolute left-3 top-3 bg-[var(--bg)]/75 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--ink)]">
+        <span className="absolute left-3 top-3 bg-black/55 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
           {beforeLabel}
         </span>
-        <span className="absolute right-3 top-3 bg-[var(--bg)]/75 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[var(--ink)]">
+        <span className="absolute right-3 top-3 bg-black/55 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-white">
           {afterLabel}
         </span>
       </div>

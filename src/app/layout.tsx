@@ -1,24 +1,24 @@
 import type { Metadata } from "next";
-import { Cormorant_Garamond, Outfit } from "next/font/google";
+import { Bricolage_Grotesque, Source_Sans_3 } from "next/font/google";
 import { SiteChrome } from "@/components/SiteChrome";
 import "./globals.css";
 
-const display = Cormorant_Garamond({
+const display = Bricolage_Grotesque({
   subsets: ["latin"],
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
   variable: "--font-display",
 });
 
-const body = Outfit({
+const body = Source_Sans_3({
   subsets: ["latin"],
-  weight: ["300", "400", "500", "600"],
+  weight: ["400", "500", "600", "700"],
   variable: "--font-body",
 });
 
 export const metadata: Metadata = {
   title: "TS Medical Aesthetics — Concept Homepage",
   description:
-    "Premium homepage concept for TS Medical Aesthetics / Trend Sassy · Mississauga. Device proof, treatment pathways, consult CTA. Prepared by Uptisement.",
+    "Physician-led medical aesthetics in Mississauga. Concept homepage by Uptisement — device proof, pathways, Google reviews, consult CTA.",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -26,7 +26,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en" className={`${display.variable} ${body.variable}`}>
       <body className="antialiased">
         <p className="concept-banner">
-          Concept homepage — TS Medical Aesthetics / Trend Sassy · prepared by Uptisement · not live
+          Concept — TS Medical Aesthetics / Trend Sassy · Uptisement · not live
         </p>
         <SiteChrome>{children}</SiteChrome>
       </body>
