@@ -66,6 +66,10 @@ body {
   @apply bg-[var(--charcoal)] px-4 py-2 text-center text-[11px] tracking-wide text-white/85;
 }
 
+.safe-bottom {
+  padding-bottom: max(0.75rem, env(safe-area-inset-bottom));
+}
+
 .stars {
   color: var(--leaf);
   letter-spacing: 0.08em;
